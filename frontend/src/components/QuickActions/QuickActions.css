@@ -1,0 +1,11 @@
+.quick-actions h3 { margin-bottom: 1rem; }
+.quick-actions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+.quick-action-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 1rem 0.8rem; background: var(--bg);
+  border: 1.5px solid var(--border); border-radius: 12px;
+  cursor: pointer; color: var(--text); font-weight: 600; font-size: 0.85rem;
+  transition: var(--transition); font-family: inherit;
+}
+.quick-action-btn:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 6px 16px rgba(59,130,246,0.2); }
+.qa-icon { color: var(--primary); }

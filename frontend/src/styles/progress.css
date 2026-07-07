@@ -1,0 +1,11 @@
+.progress { display: flex; align-items: center; gap: 0.6rem; margin: 0.6rem 0; }
+.progress_track { flex: 1; height: 8px; border-radius: 4px; background: var(--border); overflow: hidden; position: relative; }
+.progress_fill { height: 100%; border-radius: 4px; position: relative; }
+.progress_fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }

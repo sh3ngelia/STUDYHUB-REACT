@@ -1,0 +1,31 @@
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+.modal-box {
+  background: var(--surface); border-radius: 20px; padding: 2rem;
+  min-width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  border: 1px solid var(--border);
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.modal-header h3 { margin: 0; }
+.modal-close-btn {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 50%;
+  width: 32px; height: 32px; cursor: pointer; color: var(--text);
+  display: flex; align-items: center; justify-content: center; transition: var(--transition);
+}
+.modal-close-btn:hover { background: var(--danger); color: white; border-color: var(--danger); }
+
+.timer-display { font-size: 4rem; font-weight: 800; text-align: center; color: var(--primary); letter-spacing: 4px; margin-bottom: 1.5rem; font-variant-numeric: tabular-nums; }
+.timer-controls { display: flex; gap: 0.8rem; justify-content: center; margin-bottom: 1.2rem; }
+.timer-btn {
+  padding: 0.6rem 1.2rem; border-radius: 10px; border: 1px solid var(--border);
+  cursor: pointer; font-weight: 600; font-size: 0.9rem;
+  background: var(--bg); color: var(--text); transition: var(--transition); font-family: inherit;
+}
+.timer-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.timer-btn--primary { background: var(--gradient-blue); color: white; border: none; }
+.timer-btn--secondary { background: transparent; color: var(--primary); border: 1.5px solid var(--primary); }
+.timer-settings { display: flex; align-items: center; gap: 0.8rem; justify-content: center; font-size: 0.9rem; }
+.timer-settings input { width: 70px; padding: 0.4rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); text-align: center; font-size: 1rem; font-family: inherit; }

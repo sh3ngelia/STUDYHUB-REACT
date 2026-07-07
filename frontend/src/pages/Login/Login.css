@@ -1,0 +1,11 @@
+.auth-tabs { display: flex; margin-bottom: 1rem; border-radius: 12px; overflow: hidden; border: 1.5px solid var(--border); }
+.auth-tab { flex: 1; padding: 0.75rem; border: none; background: var(--bg); color: var(--text-secondary); cursor: pointer; font-weight: 600; font-size: 0.95rem; font-family: inherit; transition: var(--transition); }
+.auth-tab.active { background: var(--gradient-blue); color: white; }
+
+.login-hint { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.2rem; }
+.login-hint code { background: var(--bg); padding: 0.15rem 0.5rem; border-radius: 4px; font-family: monospace; }
+
+.auth-error { color: var(--danger); background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: 8px; padding: 0.6rem 0.9rem; margin-bottom: 0.8rem; font-size: 0.9rem; }
+
+.auth-switch { margin-top: 1.2rem; text-align: center; color: var(--text-secondary); font-size: 0.9rem; }
+.link-btn { background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 600; text-decoration: underline; font-size: inherit; font-family: inherit; padding: 0; }

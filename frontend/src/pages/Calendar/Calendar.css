@@ -1,0 +1,56 @@
+.cal-layout { display: grid; grid-template-columns: 1fr 300px; gap: 1.4rem; margin-top: 1rem; }
+@media (max-width: 768px) { .cal-layout { grid-template-columns: 1fr; } }
+
+.cal-card { padding: 1rem !important; }
+.cal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.8rem; }
+.cal-title { display: flex; align-items: center; gap: 0.6rem; font-weight: 700; font-size: 1.05rem; }
+.cal-year-nav { display: flex; align-items: center; gap: 0.3rem; }
+.cal-year-display { font-weight: 700; font-size: 1rem; min-width: 42px; text-align: center; }
+.cal-nav { background: var(--bg); border: 1px solid var(--border); border-radius: 50%; width: 34px; height: 34px; cursor: pointer; color: var(--text); display: flex; align-items: center; justify-content: center; transition: var(--transition); }
+.cal-nav:hover { background: var(--border); transform: scale(1.1); }
+
+.cal-weekdays { display: grid; grid-template-columns: repeat(7,1fr); margin-bottom: 4px; }
+.cal-wd { text-align: center; font-size: 0.72rem; font-weight: 600; color: var(--text-secondary); padding: 4px 0; }
+
+.cal-days { display: grid; grid-template-columns: repeat(7,1fr); gap: 2px; }
+.cal-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; font-size: 0.82rem; font-weight: 500; cursor: pointer; position: relative; transition: var(--transition); color: var(--text); border: 1px solid transparent; }
+.cal-day:hover { background: var(--border); }
+.cal-today { background: var(--gradient-blue) !important; color: #fff !important; font-weight: 700; box-shadow: 0 4px 12px rgba(59,130,246,0.4); }
+.cal-holiday { background: rgba(253,203,110,0.2); }
+[data-theme='dark'] .cal-holiday { background: rgba(253,203,110,0.08); }
+.cal-selected { border-color: var(--primary); background: rgba(59,130,246,0.1); }
+.cal-hol-dot { position: absolute; top: 1px; right: 2px; font-size: 0.45rem; color: #d97706; }
+.cal-ev-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); position: absolute; bottom: 2px; }
+
+.cal-detail-title { margin-top: 0; font-size: 1rem; margin-bottom: 0.5rem; }
+.cal-holiday-label { background: rgba(253,203,110,0.25); color: #92600a; padding: 0.35rem 0.7rem; border-radius: 6px; font-size: 0.85rem; margin-bottom: 0.8rem; }
+[data-theme='dark'] .cal-holiday-label { color: #fbbf24; background: rgba(253,203,110,0.1); }
+.cal-empty { color: var(--text-secondary); font-size: 0.88rem; margin-top: 0.5rem; }
+
+.event-list { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; flex-direction: column; gap: 0.4rem; }
+.event-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.7rem; background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--primary); border-radius: 8px; font-size: 0.85rem; }
+.event-date { color: var(--primary); font-weight: 600; font-size: 0.78rem; min-width: 88px; }
+.event-text { flex: 1; }
+.event-delete { background: none; border: none; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; flex-shrink: 0; transition: color 0.2s; }
+.event-delete:hover { color: var(--danger); }
+
+.event-add-form { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+.event-add-form input { flex: 1; padding: 0.5rem 0.7rem; border-radius: 8px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-size: 0.88rem; font-family: inherit; }
+.event-add-form input:focus { outline: none; border-color: var(--primary); }
+.event-add-btn { background: var(--gradient-blue); color: white; border: none; border-radius: 8px; padding: 0.5rem 0.7rem; cursor: pointer; display: flex; align-items: center; transition: var(--transition); }
+.event-add-btn:hover { transform: scale(1.08); }
+.cal-year-input {
+  width: 58px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 2px 4px;
+  font-family: inherit;
+}
+.cal-year-input:focus { outline: none; border-color: var(--primary); }
+.cal-year-input::-webkit-inner-spin-button,
+.cal-year-input::-webkit-outer-spin-button { -webkit-appearance: none; }

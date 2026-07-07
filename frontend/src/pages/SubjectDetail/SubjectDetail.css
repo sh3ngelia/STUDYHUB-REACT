@@ -1,0 +1,12 @@
+.detail-card { margin-top: 1rem; }
+.detail-bar { height: 6px; border-radius: 4px; margin-bottom: 1.5rem; }
+.detail-progress_label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+.detail-progress_value { font-size: 1.3rem; font-weight: 800; color: var(--primary); }
+.detail-progress_track { height: 14px !important; border-radius: 8px !important; }
+.detail-progress_controls { margin-top: 0.8rem; }
+.progress-slider { width: 100%; margin-top: 0.6rem; accent-color: var(--primary); cursor: pointer; }
+.detail-save-row { display: flex; align-items: center; gap: 1rem; margin-top: 0.8rem; }
+.save-msg { font-size: 0.9rem; font-weight: 600; color: var(--success); }
+.detail-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+.detail-auth-hint { color: var(--text-secondary); font-size: 0.88rem; margin-top: 0.8rem; }
+.detail-auth-hint a { color: var(--primary); }

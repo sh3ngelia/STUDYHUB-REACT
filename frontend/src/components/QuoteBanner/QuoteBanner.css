@@ -1,0 +1,7 @@
+.quote-banner {
+  background: var(--gradient);
+  color: white; text-align: center;
+  padding: 2.5rem 2rem; border-radius: 16px; margin: 2rem 0;
+}
+.quote-banner blockquote { font-size: 1.15rem; font-style: italic; line-height: 1.7; max-width: 560px; margin: 0 auto 0.8rem; }
+.quote-banner cite { font-size: 0.9rem; opacity: 0.85; }

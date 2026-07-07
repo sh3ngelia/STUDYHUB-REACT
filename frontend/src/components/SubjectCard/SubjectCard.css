@@ -1,0 +1,28 @@
+.subject-card { position: relative; overflow: hidden; }
+.subject-card_top-bar { height: 5px; border-radius: 4px; margin-bottom: 0.9rem; }
+.subject-card_title { color: var(--primary); margin-bottom: 0.4rem; }
+.subject-card_desc { color: var(--text-secondary); font-size: 0.9rem; min-height: 2.4em; margin-bottom: 0.8rem; }
+.subject-card_empty { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
+.subject-card_pct { font-weight: 700; color: var(--primary); min-width: 38px; }
+
+.subject-card_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+.subject-card_actions { display: flex; gap: 0.5rem; align-items: center; }
+.subject-card_link { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+
+.delete-btn {
+  background: transparent; border: 1px solid var(--border);
+  border-radius: 8px; padding: 5px 8px;
+  cursor: pointer; color: var(--text-secondary);
+  font-size: 0.8rem; transition: var(--transition);
+  display: flex; align-items: center;
+}
+.delete-btn:hover { color: var(--danger); border-color: var(--danger); }
+.delete-btn.confirm { background: var(--danger); color: white; border-color: var(--danger); font-weight: 700; }
+.delete-btn:disabled { opacity: 0.4; cursor: not-allowed; }

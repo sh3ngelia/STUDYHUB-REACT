@@ -1,0 +1,6 @@
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 1.8rem; align-items: stretch; }
+.tip-card { text-align: center; height: 100%; }
+.tip-icon { color: var(--primary); margin: 0 auto 0.6rem; display: block; }
+.tip-card h3 { margin-bottom: 0.3rem; }
+.tip-card p { color: var(--text-secondary); font-size: 0.88rem; }
+.form-card { max-width: 600px; margin: 0 auto; }

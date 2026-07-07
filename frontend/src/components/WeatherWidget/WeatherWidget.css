@@ -1,0 +1,8 @@
+.weather-widget { text-align: center; }
+.weather-widget h3 { margin-bottom: 0.6rem; color: var(--primary); }
+.weather-main { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 0.4rem 0; }
+.weather-temp { font-size: 3rem; font-weight: 800; }
+.weather-label { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.8rem; }
+.weather-details { display: flex; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+.weather-detail { display: flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; color: var(--text-secondary); }
+.weather-icon { color: var(--primary); }
