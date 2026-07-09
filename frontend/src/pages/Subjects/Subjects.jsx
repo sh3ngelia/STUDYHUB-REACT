@@ -27,6 +27,7 @@ export default function Subjects() {
       dispatch(fetchStart());
       try {
         const { data } = await api.get('/subjects');
+        console.log(data[0]);
         dispatch(fetchSuccess(data));
       } catch (err) {
         dispatch(fetchFailure(err.response?.data?.message || err.message));

@@ -10,3 +10,7 @@
 .detail-footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
 .detail-auth-hint { color: var(--text-secondary); font-size: 0.88rem; margin-top: 0.8rem; }
 .detail-auth-hint a { color: var(--primary); }
+.color-picker { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.4rem; }
+.color-swatch { width: 28px; height: 28px; border-radius: 50%; border: 3px solid transparent; cursor: pointer; transition: transform 0.15s; }
+.color-swatch:hover { transform: scale(1.15); }
+.color-swatch.active { border-color: var(--text); transform: scale(1.15); }

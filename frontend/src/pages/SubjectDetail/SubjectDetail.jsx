@@ -16,6 +16,11 @@ import '../../styles/progress.css';
 import '../../styles/forms.css';
 import './SubjectDetail.css';
 
+const COLORS = [
+  '#6c5ce7', '#0984e3', '#00b894', '#e17055',
+  '#fdcb6e', '#e84393', '#00cec9', '#a29bfe',
+];
+
 export default function SubjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,6 +35,7 @@ export default function SubjectDetail() {
   const [editing, setEditing] = useState(false);
   const [editTitle, setEditTitle] = useState('');
   const [editDesc, setEditDesc] = useState('');
+  const [editColor, setEditColor] = useState('');
   const [editSaving, setEditSaving] = useState(false);
 
   useEffect(() => {
@@ -55,8 +61,8 @@ export default function SubjectDetail() {
     setSaving(true);
     setSaveMsg('');
     try {
-      await api.patch(`/subjects/${subject.id}`, { progress });
-      dispatch(updateSubjectProgress({ id: subject.id, progress }));
+      await api.patch(`/subjects/${subject._id}`, { progress });
+      dispatch(updateSubjectProgress({ id: subject._id, progress }));
       setSubject({ ...subject, progress });
       setSaveMsg('შენახულია!');
       setTimeout(() => setSaveMsg(''), 2500);
@@ -70,6 +76,7 @@ export default function SubjectDetail() {
   const startEdit = () => {
     setEditTitle(subject.title);
     setEditDesc(subject.description);
+    setEditColor(subject.color);
     setEditing(true);
   };
 
@@ -77,9 +84,9 @@ export default function SubjectDetail() {
     if (!editTitle.trim() || !editDesc.trim()) return;
     setEditSaving(true);
     try {
-      await api.patch(`/subjects/${subject.id}`, { title: editTitle.trim(), description: editDesc.trim() });
-      setSubject({ ...subject, title: editTitle.trim(), description: editDesc.trim() });
-      dispatch(updateSubject({ id: subject.id, title: editTitle.trim(), description: editDesc.trim() }));
+      await api.patch(`/subjects/${subject._id}`, { title: editTitle.trim(), description: editDesc.trim(), color: editColor });
+      setSubject({ ...subject, title: editTitle.trim(), description: editDesc.trim(), color: editColor });
+      dispatch(updateSubject({ id: subject._id, title: editTitle.trim(), description: editDesc.trim(), color: editColor }));
       setEditing(false);
     } catch {
       // შეცდომა
@@ -126,6 +133,20 @@ export default function SubjectDetail() {
               maxLength={300}
               onChange={(e) => setEditDesc(e.target.value)}
             />
+          </div>
+          <div className="form-field">
+            <label>ფერი</label>
+            <div className="color-picker">
+              {COLORS.map((c) => (
+                <button
+                  key={c}
+                  className={`color-swatch${editColor === c ? ' active' : ''}`}
+                  style={{ background: c }}
+                  onClick={() => setEditColor(c)}
+                  type="button"
+                />
+              ))}
+            </div>
           </div>
           <div className="form-actions">
             <Button variant="secondary" onClick={() => setEditing(false)}>

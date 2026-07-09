@@ -5,7 +5,7 @@ const subjectsSlice = createSlice({
   initialState: { items: [], status: 'idle', error: null },
   reducers: {
     fetchStart(state)                { state.status = 'loading'; state.error = null; },
-    fetchSuccess(state, { payload }) { state.status = 'succeeded'; state.items = payload; },
+    fetchSuccess(state, { payload }) {state.status = 'succeeded';state.items = payload.map(({ _id, ...rest }) => ({ ...rest, id: _id }));},
     fetchFailure(state, { payload }) { state.status = 'failed'; state.error = payload; },
     addSubject(state, { payload })   { state.items.push(payload); },
     removeSubject(state, { payload }) {
@@ -15,9 +15,9 @@ const subjectsSlice = createSlice({
       const s = state.items.find((s) => s.id === id);
       if (s) s.progress = progress;
     },
-    updateSubject(state, { payload: { id, title, description } }) {
+    updateSubject(state, { payload: { id, title, description, color } }) {
       const s = state.items.find((s) => s.id === id);
-      if (s) { s.title = title; s.description = description; }
+      if (s) { s.title = title; s.description = description; s.color = color; }
     },
     resetSubjects(state) {
       state.items  = [];
