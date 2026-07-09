@@ -14,10 +14,10 @@ import '../../styles/forms.css';
 import './AddSubject.css';
 
 const TIPS = [
-  { Icon: BookOpen, title: 'მიზანი',         desc: 'კონკრეტული მიზანი დაუსახე თავს.' },
-  { Icon: Clock,    title: 'განრიგი',         desc: 'ყოველ დღე გარკვეული დრო გამოყავი.' },
-  { Icon: FileText, title: 'ჩანაწერები',      desc: 'კარგი ჩანაწერები = კარგი შედეგი.' },
-  { Icon: Trophy,   title: 'კონსისტენტობა',  desc: 'ყოველდღიური 30 წუთი ჯობია კვირაში ერთ გრძელ სესიას.' },
+  { Icon: BookOpen, title: 'მიზანი',         desc: 'კონკრეტული მიზანი დაუსახე თავს' },
+  { Icon: Clock,    title: 'განრიგი',         desc: 'ყოველ დღე გარკვეული დრო გამოყავი' },
+  { Icon: FileText, title: 'ჩანაწერები',      desc: 'კარგი ჩანაწერები = კარგი შედეგი' },
+  { Icon: Trophy,   title: 'კონსისტენტობა',  desc: 'ყოველდღიური 30 წუთი ჯობია კვირაში ერთ გრძელ სესიას' },
 ];
 
 export default function AddSubject() {
@@ -75,7 +75,7 @@ export default function AddSubject() {
               id="title" type="text" maxLength={50} placeholder="მაგ. მათემატიკა"
               {...register('title', {
                 required: 'სახელის ველი სავალდებულოა',
-                minLength: { value: 2, message: 'მინიმუმ 2 სიმბოლო' },
+                validate: (v) => v.trim().length >= 2 || 'მინიმუმ 2 სიმბოლო',
                 pattern: { value: /^[A-Za-zა-ჰ0-9\s'-]+$/, message: 'გამოიყენეთ მხოლოდ ასოები და ციფრები' },
               })}
             />
@@ -91,7 +91,7 @@ export default function AddSubject() {
               id="description" rows={4} maxLength={300} placeholder="მოკლე აღწერა..."
               {...register('description', {
                 required: 'აღწერის ველი სავალდებულოა',
-                minLength: { value: 10, message: 'მინიმუმ 10 სიმბოლო' },
+                validate: (v) => v.trim().length >= 10 || 'მინიმუმ 10 სიმბოლო',
               })}
             />
             {errors.description && <span className="field-error">{errors.description.message}</span>}
