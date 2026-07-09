@@ -114,7 +114,16 @@ export default function Profile() {
             </div>
             <div className="form-field">
               <label>ახალი პაროლი</label>
-              <input type="password" placeholder="••••••" {...pwForm.register('newPassword', { required: 'სავალდებულო', minLength: { value: 5, message: 'მინ. 5 სიმბოლო' } })} />
+              <input type="password" placeholder="••••••" {...pwForm.register('newPassword', {
+                  required: 'სავალდებულო',
+                  validate: (v) => {
+                    if (v.length < 8) return 'მინ. 8 სიმბოლო';
+                    if (!/[A-Z]/.test(v)) return 'მინიმუმ ერთი დიდი ასო';
+                    if (!/[a-z]/.test(v)) return 'მინიმუმ ერთი პატარა ასო';
+                    if (!/[0-9]/.test(v)) return 'მინიმუმ ერთი ციფრი';
+                    return true;
+                  },
+                })} />
               {pwForm.formState.errors.newPassword && <span className="field-error">{pwForm.formState.errors.newPassword.message}</span>}
             </div>
             <div className="form-field">

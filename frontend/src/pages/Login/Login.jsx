@@ -69,7 +69,16 @@ export default function Login() {
               <div className="form-field">
                 <label htmlFor="password">პაროლი</label>
                 <input id="password" type="password" placeholder="••••••"
-                  {...register('password', { required: 'სავალდებულო', minLength: { value: 5, message: 'მინ. 5 სიმბოლო' } })} />
+                  {...register('password', {
+                    required: 'სავალდებულო',
+                    validate: (v) => {
+                      if (v.length < 8) return 'მინ. 8 სიმბოლო';
+                      if (!/[A-Z]/.test(v)) return 'მინიმუმ ერთი დიდი ასო';
+                      if (!/[a-z]/.test(v)) return 'მინიმუმ ერთი პატარა ასო';
+                      if (!/[0-9]/.test(v)) return 'მინიმუმ ერთი ციფრი';
+                      return true;
+                    },
+                  })} />
                 {errors.password && <span className="field-error">{errors.password.message}</span>}
               </div>
 
