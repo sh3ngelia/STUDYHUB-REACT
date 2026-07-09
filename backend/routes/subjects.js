@@ -36,11 +36,12 @@ router.post('/', authMiddleware, async (req, res) => {
 });
 
 router.patch('/:id', authMiddleware, async (req, res) => {
-  const { progress, title, description } = req.body || {};
+  const { progress, title, description, color } = req.body || {};
   const update = {};
   if (progress !== undefined) update.progress = clampProgress(progress);
   if (title !== undefined) update.title = title.trim();
   if (description !== undefined) update.description = description.trim();
+  if (color !== undefined) update.color = color;
 
   const subject = await Subject.findOneAndUpdate(
     { _id: req.params.id, owner: req.user.id },
