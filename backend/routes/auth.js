@@ -8,7 +8,7 @@ import Event from '../models/Event.js';
 const router = Router();
 
 const signToken = (user) =>
-  jwt.sign({ id: user._id, username: user.username, name: user.name }, process.env.JWT_SECRET, { expiresIn: '2h' });
+  jwt.sign({ id: user._id, username: user.username, name: user.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
 
 const safeUser = (u) => ({ id: u._id, username: u.username, name: u.name });
 
