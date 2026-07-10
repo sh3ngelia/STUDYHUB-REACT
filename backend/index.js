@@ -24,5 +24,5 @@ app.use((err, _req, res, _next) => {
 });
 
 connectDB()
-  .then(() => app.listen(PORT, () => console.log(`StudyHub API → http://localhost:${PORT}`)))
+  .then(() => app.listen(PORT, () => console.log(`StudyHub API - http://localhost:${PORT}`)))
   .catch((err) => { console.error('DB connection failed:', err); process.exit(1); });
