@@ -6,6 +6,7 @@ import Subject from '../models/Subject.js';
 import Event from '../models/Event.js';
 
 const router = Router();
+const strongPassword = (p) => p.length >= 8 && /[A-Z]/.test(p) && /[a-z]/.test(p) && /[0-9]/.test(p);
 
 const signToken = (user) =>
   jwt.sign({ id: user._id, username: user.username, name: user.name }, process.env.JWT_SECRET, { expiresIn: '7d' });
@@ -26,7 +27,7 @@ router.post('/login', async (req, res) => {
 router.post('/register', async (req, res) => {
   const { username, password, name } = req.body || {};
   if (!username || !password || !name) return res.status(400).json({ message: 'ყველა ველი სავალდებულოა' });
-  if (password.length < 5) return res.status(400).json({ message: 'პაროლი მინ. 5 სიმბოლო' });
+  if (!strongPassword(password)) return res.status(400).json({ message: 'პაროლი: მინ. 8 სიმბოლო, დიდი/პატარა ასო, ციფრი' });
 
   const exists = await User.findOne({ username });
   if (exists) return res.status(409).json({ message: 'მომხმარებლის სახელი უკვე დაკავებულია' });
@@ -51,7 +52,7 @@ router.patch('/me/password', authMiddleware, async (req, res) => {
   if (!(await user.comparePassword(currentPassword))) {
     return res.status(401).json({ message: 'მიმდინარე პაროლი არასწორია' });
   }
-  if (!newPassword || newPassword.length < 5) return res.status(400).json({ message: 'ახალი პაროლი მინ. 5 სიმბოლო' });
+  if (!newPassword || !strongPassword(newPassword)) return res.status(400).json({ message: 'პაროლი: მინ. 8 სიმბოლო, დიდი/პატარა ასო, ციფრი' });
   user.password = newPassword;
   await user.save();
   res.json({ message: 'პაროლი შეიცვალა' });
