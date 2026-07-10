@@ -7,7 +7,10 @@ const subjectsSlice = createSlice({
     fetchStart(state)                { state.status = 'loading'; state.error = null; },
     fetchSuccess(state, { payload }) {state.status = 'succeeded';state.items = payload.map(({ _id, ...rest }) => ({ ...rest, id: _id }));},
     fetchFailure(state, { payload }) { state.status = 'failed'; state.error = payload; },
-    addSubject(state, { payload })   { state.items.push(payload); },
+    addSubject(state, { payload }) {
+      const { _id, ...rest } = payload;
+      state.items.push({ ...rest, id: _id ?? payload.id });
+    },
     removeSubject(state, { payload }) {
       state.items = state.items.filter((s) => s.id !== payload);
     },

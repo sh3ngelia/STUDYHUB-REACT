@@ -42,9 +42,9 @@ export default function App() {
           <div className="footer-section">
             <h4>სწრაფი ბმულები</h4>
             <ul className="footer-links">
-              <li><a href="/subjects">ჩემი საგნები</a></li>
-              <li><a href="/calendar">კალენდარი</a></li>
-              <li><a href="/add">საგნის დამატება</a></li>
+              <li><Link to="/subjects">ჩემი საგნები</Link></li>
+              <li><Link to="/calendar">კალენდარი</Link></li>
+              <li><Link to="/add">საგნის დამატება</Link></li>
             </ul>
           </div>
           <div className="footer-section">
