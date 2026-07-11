@@ -18,6 +18,7 @@ export default function Subjects() {
   const { isAuthenticated } = useAuth();
   const { items, status, error } = useSelector((s) => s.subjects);
   const [query, setQuery] = useState('');
+  const [sort, setSort] = useState('date-desc');
 
   useEffect(() => {
     if (!isAuthenticated) return;
@@ -27,7 +28,6 @@ export default function Subjects() {
       dispatch(fetchStart());
       try {
         const { data } = await api.get('/subjects');
-        console.log(data[0]);
         dispatch(fetchSuccess(data));
       } catch (err) {
         dispatch(fetchFailure(err.response?.data?.message || err.message));
@@ -43,6 +43,15 @@ export default function Subjects() {
     s.title.toLowerCase().includes(query.toLowerCase()) ||
     s.description.toLowerCase().includes(query.toLowerCase())
   );
+
+  const sortedFiltered = [...filtered].sort((a, b) => {
+    if (sort === 'name-asc')      return a.title.localeCompare(b.title, 'ka');
+    if (sort === 'name-desc')     return b.title.localeCompare(a.title, 'ka');
+    if (sort === 'progress-asc')  return a.progress - b.progress;
+    if (sort === 'progress-desc') return b.progress - a.progress;
+    if (sort === 'date-asc')      return new Date(a.createdAt) - new Date(b.createdAt);
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
 
   return (
     <div className="page">
@@ -66,15 +75,29 @@ export default function Subjects() {
       </div>
 
       {isAuthenticated && status === 'succeeded' && items.length > 0 && (
-        <div className="subjects-search">
-          <Search size={16} className="subjects-search_icon" />
-          <input
-            type="text"
-            placeholder="საგნის ძიება..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="subjects-search_input"
-          />
+        <div className="subjects-toolbar">
+          <div className="subjects-search">
+            <Search size={16} className="subjects-search_icon" />
+            <input
+              type="text"
+              placeholder="საგნის ძიება..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="subjects-search_input"
+            />
+          </div>
+          <select
+            className="subjects-sort"
+            value={sort}
+            onChange={(e) => setSort(e.target.value)}
+          >
+            <option value="date-desc">თარიღი (ახალი)</option>
+            <option value="date-asc">თარიღი (ძველი)</option>
+            <option value="name-asc">სახელი (ა-ჰ)</option>
+            <option value="name-desc">სახელი (ჰ-ა)</option>
+            <option value="progress-desc">პროგრესი (მაღალი)</option>
+            <option value="progress-asc">პროგრესი (დაბალი)</option>
+          </select>
         </div>
       )}
 
@@ -109,14 +132,14 @@ export default function Subjects() {
       {isAuthenticated && status === 'failed' && <ErrorMessage message={error} />}
 
       {isAuthenticated && status === 'succeeded' && (
-        filtered.length > 0 ? (
+        sortedFiltered.length > 0 ? (
           <motion.div
             className="subjects-grid"
             initial="hidden"
             animate="visible"
             variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
           >
-            {filtered.map((s) => <SubjectCard key={s.id} subject={s} />)}
+            {sortedFiltered.map((s) => <SubjectCard key={s.id} subject={s} />)}
           </motion.div>
         ) : (
           <div className="subjects-empty">
