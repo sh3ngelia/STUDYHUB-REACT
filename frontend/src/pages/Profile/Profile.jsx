@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import api from '../../api/client';
 import Card from '../../components/Card/Card';
@@ -23,6 +24,9 @@ export default function Profile() {
   const [msg, setMsg] = useState(null);
   const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState('');
+  const [showCurrent, setShowCurrent] = useState(false);
+  const [showNew, setShowNew] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const nameForm = useForm({ defaultValues: { name: user?.name || '' } });
   const pwForm = useForm();
@@ -109,12 +113,18 @@ export default function Profile() {
           <form onSubmit={pwForm.handleSubmit(onChangePassword)} noValidate>
             <div className="form-field">
               <label>მიმდინარე პაროლი</label>
-              <input type="password" placeholder="••••••" {...pwForm.register('currentPassword', { required: 'სავალდებულო' })} />
+              <div className="input-eye">
+                <input type={showCurrent ? 'text' : 'password'} placeholder="........" {...pwForm.register('currentPassword', { required: 'სავალდებულო' })} />
+                <button type="button" className="eye-btn" onClick={() => setShowCurrent((v) => !v)}>
+                  {showCurrent ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
               {pwForm.formState.errors.currentPassword && <span className="field-error">{pwForm.formState.errors.currentPassword.message}</span>}
             </div>
             <div className="form-field">
               <label>ახალი პაროლი</label>
-              <input type="password" placeholder="••••••" {...pwForm.register('newPassword', {
+              <div className="input-eye">
+                <input type={showNew ? 'text' : 'password'} placeholder="........" {...pwForm.register('newPassword', {
                   required: 'სავალდებულო',
                   validate: (v) => {
                     if (v.length < 8) return 'მინ. 8 სიმბოლო';
@@ -124,12 +134,21 @@ export default function Profile() {
                     return true;
                   },
                 })} />
+                <button type="button" className="eye-btn" onClick={() => setShowNew((v) => !v)}>
+                  {showNew ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
               {pwForm.formState.errors.newPassword && <span className="field-error">{pwForm.formState.errors.newPassword.message}</span>}
             </div>
             <div className="form-field">
               <label>გაიმეორე ახალი პაროლი</label>
-              <input type="password" placeholder="••••••"
-                {...pwForm.register('confirmPassword', { required: 'სავალდებულო', validate: (v) => v === pwForm.watch('newPassword') || 'პაროლები არ ემთხვევა' })} />
+              <div className="input-eye">
+                <input type={showConfirm ? 'text' : 'password'} placeholder="........"
+                  {...pwForm.register('confirmPassword', { required: 'სავალდებულო', validate: (v) => v === pwForm.watch('newPassword') || 'პაროლები არ ემთხვევა' })} />
+                <button type="button" className="eye-btn" onClick={() => setShowConfirm((v) => !v)}>
+                  {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
               {pwForm.formState.errors.confirmPassword && <span className="field-error">{pwForm.formState.errors.confirmPassword.message}</span>}
             </div>
             <div className="form-actions">

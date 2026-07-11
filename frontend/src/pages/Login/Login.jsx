@@ -72,7 +72,7 @@ export default function Login() {
               <div className="form-field">
                 <label htmlFor="password">პაროლი</label>
                 <div className="input-eye">
-                  <input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••"
+                  <input id="password" type={showPassword ? 'text' : 'password'} placeholder="........"
                     {...register('password', {
                       required: 'სავალდებულო',
                       validate: (v) => {
@@ -95,7 +95,7 @@ export default function Login() {
                 <div className="form-field">
                   <label htmlFor="confirm">პაროლის დადასტურება</label>
                   <div className="input-eye">
-                    <input id="confirm" type={showConfirm ? 'text' : 'password'} placeholder="••••••"
+                    <input id="confirm" type={showConfirm ? 'text' : 'password'} placeholder="........"
                       {...register('confirm', {
                         required: 'სავალდებულო',
                         validate: (v) => v === pwVal || 'პაროლები არ ემთხვევა',
