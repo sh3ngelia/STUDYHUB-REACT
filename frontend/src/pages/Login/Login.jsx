@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import Card from '../../components/Card/Card';
 import Button from '../../components/Button/Button';
@@ -14,10 +15,12 @@ export default function Login() {
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
   const { login, register: registerUser, authError, setAuthError } = useAuth();
   const [submitting, setSubmitting] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const switchMode = (m) => { setMode(m); reset(); setAuthError(null); };
+  const switchMode = (m) => { setMode(m); reset(); setAuthError(null); setShowPassword(false); setShowConfirm(false); };
 
   const onSubmit = async (vals) => {
     setSubmitting(true);
@@ -68,28 +71,39 @@ export default function Login() {
 
               <div className="form-field">
                 <label htmlFor="password">პაროლი</label>
-                <input id="password" type="password" placeholder="••••••"
-                  {...register('password', {
-                    required: 'სავალდებულო',
-                    validate: (v) => {
-                      if (v.length < 8) return 'მინ. 8 სიმბოლო';
-                      if (!/[A-Z]/.test(v)) return 'მინიმუმ ერთი დიდი ასო';
-                      if (!/[a-z]/.test(v)) return 'მინიმუმ ერთი პატარა ასო';
-                      if (!/[0-9]/.test(v)) return 'მინიმუმ ერთი ციფრი';
-                      return true;
-                    },
-                  })} />
+                <div className="input-eye">
+                  <input id="password" type={showPassword ? 'text' : 'password'} placeholder="••••••"
+                    {...register('password', {
+                      required: 'სავალდებულო',
+                      validate: (v) => {
+                        if (mode === 'login') return true;
+                        if (v.length < 8) return 'მინ. 8 სიმბოლო';
+                        if (!/[A-Z]/.test(v)) return 'მინიმუმ ერთი დიდი ასო';
+                        if (!/[a-z]/.test(v)) return 'მინიმუმ ერთი პატარა ასო';
+                        if (!/[0-9]/.test(v)) return 'მინიმუმ ერთი ციფრი';
+                        return true;
+                      },
+                    })} />
+                  <button type="button" className="eye-btn" onClick={() => setShowPassword((v) => !v)}>
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
+                </div>
                 {errors.password && <span className="field-error">{errors.password.message}</span>}
               </div>
 
               {mode === 'register' && (
                 <div className="form-field">
                   <label htmlFor="confirm">პაროლის დადასტურება</label>
-                  <input id="confirm" type="password" placeholder="••••••"
-                    {...register('confirm', {
-                      required: 'სავალდებულო',
-                      validate: (v) => v === pwVal || 'პაროლები არ ემთხვევა',
-                    })} />
+                  <div className="input-eye">
+                    <input id="confirm" type={showConfirm ? 'text' : 'password'} placeholder="••••••"
+                      {...register('confirm', {
+                        required: 'სავალდებულო',
+                        validate: (v) => v === pwVal || 'პაროლები არ ემთხვევა',
+                      })} />
+                    <button type="button" className="eye-btn" onClick={() => setShowConfirm((v) => !v)}>
+                      {showConfirm ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
                   {errors.confirm && <span className="field-error">{errors.confirm.message}</span>}
                 </div>
               )}
