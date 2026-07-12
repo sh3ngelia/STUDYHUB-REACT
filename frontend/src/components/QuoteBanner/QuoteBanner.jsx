@@ -27,7 +27,7 @@ export default function QuoteBanner() {
   const quote = QUOTES[new Date().getDate() % QUOTES.length];
   return (
     <div className="quote-banner">
-      <blockquote>"{quote.text}"</blockquote>
+      <blockquote>&ldquo;{quote.text}&rdquo;</blockquote>
       <cite>- {quote.author}</cite>
     </div>
   );

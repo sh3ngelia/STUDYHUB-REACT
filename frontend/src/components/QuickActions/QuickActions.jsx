@@ -5,7 +5,7 @@ import './QuickActions.css';
 
 export default function QuickActions({ onTimerOpen }) {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  useAuth();
 
   const links = [
     { Icon: Plus,     label: 'საგნის დამატება', action: () => navigate('/add') },

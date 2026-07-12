@@ -144,7 +144,7 @@ export default function Subjects() {
         ) : (
           <div className="subjects-empty">
             {query ? (
-              <p>"{query}" - ვერ მოიძებნა.</p>
+              <p>&ldquo;{query}&rdquo; - ვერ მოიძებნა.</p>
             ) : (
               <>
                 <p>საგნები არ არის. დაამატე პირველი და დაიწყე პროგრესის თვალყურის დევნება.</p>

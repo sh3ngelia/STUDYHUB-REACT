@@ -7,14 +7,18 @@ import { AuthContext } from '../context/AuthContext';
 import subjectsReducer from '../store/subjectsSlice';
 import Login from '../pages/Login/Login';
 
+const cleanProps = (props) => {
+  const bad = ['whileHover','whileTap','initial','animate','exit','transition'];
+  return Object.fromEntries(Object.entries(props).filter(([k]) => !bad.includes(k)));
+};
+
 vi.mock('framer-motion', () => ({
   motion: {
-    button: ({ children, whileHover, whileTap, ...p }) => <button {...p}>{children}</button>,
-    div:    ({ children, initial, animate, exit, transition, whileHover, ...p }) => <div {...p}>{children}</div>,
+    button: ({ children, ...p }) => <button {...cleanProps(p)}>{children}</button>,
+    div:    ({ children, ...p }) => <div    {...cleanProps(p)}>{children}</div>,
   },
   AnimatePresence: ({ children }) => <>{children}</>,
 }));
-
 const store = configureStore({ reducer: { subjects: subjectsReducer } });
 
 const mockAuth = {
