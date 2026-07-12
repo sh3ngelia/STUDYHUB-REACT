@@ -5,6 +5,7 @@ import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../Button/Button';
 import './Navbar.css';
+import { usernameToColor } from '../../utils/colors';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
@@ -50,7 +51,12 @@ export default function Navbar() {
           </button>
           {isAuthenticated ? (
             <>
-              <button className="avatar-btn" onClick={() => navigate('/profile')} title={user.name}>
+              <button
+                className="avatar-btn"
+                onClick={() => navigate('/profile')}
+                title={user.name}
+                style={{ background: usernameToColor(user.username) }}
+              >
                 {user.name?.[0]?.toUpperCase()}
               </button>
               <Button variant="secondary" onClick={handleLogout}>გასვლა</Button>

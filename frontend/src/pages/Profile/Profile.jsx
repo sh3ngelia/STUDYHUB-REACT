@@ -10,6 +10,7 @@ import Button from '../../components/Button/Button';
 import '../../styles/page-banner.css';
 import '../../styles/forms.css';
 import './Profile.css';
+import { usernameToColor } from '../../utils/colors';
 
 const TABS = [
   { id: 'info',     label: 'ინფო' },
@@ -30,6 +31,8 @@ export default function Profile() {
 
   const nameForm = useForm({ defaultValues: { name: user?.name || '' } });
   const pwForm = useForm();
+
+  const avatarColor = usernameToColor(user?.username);
 
   const onUpdateName = async ({ name }) => {
     setLoading(true); setMsg(null);
@@ -71,7 +74,11 @@ export default function Profile() {
   return (
     <div className="page">
       <div className="page-banner">
-        <div className="profile-avatar">{user?.name?.[0]?.toUpperCase() || '?'}</div>
+        <div
+          className="profile-avatar"
+          style={{ background: avatarColor, borderColor: `${avatarColor}99` }}>
+          {user?.name?.[0]?.toUpperCase() || '?'}
+        </div>
         <h1>{user?.name}</h1>
         <p>@{user?.username}</p>
       </div>
