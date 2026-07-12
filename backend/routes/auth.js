@@ -36,6 +36,12 @@ router.post('/register', async (req, res) => {
   res.status(201).json({ token: signToken(user), user: safeUser(user) });
 });
 
+router.get('/me', authMiddleware, async (req, res) => {
+  const user = await User.findById(req.user.id);
+  if (!user) return res.status(404).json({ message: 'მომხმარებელი ვერ მოიძებნა' });
+  res.json(safeUser(user));
+});
+
 router.patch('/me', authMiddleware, async (req, res) => {
   const { name } = req.body || {};
   if (!name || name.trim().length < 2) return res.status(400).json({ message: 'სახელი მინ. 2 სიმბოლო' });

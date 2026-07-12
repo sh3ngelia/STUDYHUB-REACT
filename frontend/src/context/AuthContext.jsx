@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../api/client';
 import { resetSubjects } from '../store/subjectsSlice';
@@ -13,10 +13,26 @@ export function AuthProvider({ children }) {
       localStorage.removeItem('studyhub_user');
       return null;
     }
-
     try { return JSON.parse(localStorage.getItem('studyhub_user')); } catch { return null; }
   });
   const [authError, setAuthError] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem('studyhub_token');
+    if (!token) return;
+
+    api.get('/auth/me')
+      .then(({ data }) => {
+        setUser(data);
+        localStorage.setItem('studyhub_user', JSON.stringify(data));
+      })
+      .catch(() => {
+        localStorage.removeItem('studyhub_token');
+        localStorage.removeItem('studyhub_user');
+        dispatch(resetSubjects());
+        setUser(null);
+      });
+  }, [dispatch]);
 
   const login = async (username, password) => {
     setAuthError(null);
