@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
+import rateLimit from 'express-rate-limit';
 import { authMiddleware } from '../middleware/authMiddleware.js';
 import User from '../models/User.js';
 import Subject from '../models/Subject.js';
@@ -13,7 +14,15 @@ const signToken = (user) =>
 
 const safeUser = (u) => ({ id: u._id, username: u.username, name: u.name });
 
-router.post('/login', async (req, res) => {
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { message: 'ძალიან ბევრი მცდელობა, სცადე 15 წუთში' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+router.post('/login', loginLimiter, async (req, res) => {
   const { username, password } = req.body || {};
   if (!username || !password) return res.status(400).json({ message: 'ყველა ველი სავალდებულოა' });
 
