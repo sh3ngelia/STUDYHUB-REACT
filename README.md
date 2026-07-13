@@ -18,17 +18,17 @@
 
 **Frontend**
 - React 18 + Vite
-- Redux Toolkit — გლობალური state მართვა
-- React Router v6 — კლიენტის მხარის მარშრუტიზაცია
-- Framer Motion — ანიმაციები
-- React Hook Form — ფორმების ვალიდაცია
-- Lucide React — იკონები
+- Redux Toolkit - გლობალური state მართვა
+- React Router v6 - კლიენტის მხარის მარშრუტიზაცია
+- Framer Motion - ანიმაციები
+- React Hook Form - ფორმების ვალიდაცია
+- Lucide React - იკონები
 
 **Backend**
 - Node.js + Express
 - MongoDB + Mongoose
-- JSON Web Token (JWT) — ავთენტიფიკაცია
-- bcrypt — პაროლის ჰეშირება
+- JSON Web Token (JWT) - ავთენტიფიკაცია
+- bcrypt - პაროლის ჰეშირება
 
 **Deploy**
 - Frontend: Vercel
@@ -38,7 +38,6 @@
 
 **წინაპირობები:** Node.js 18+, MongoDB
 
-```bash
 # Backend
 cd backend
 npm install
